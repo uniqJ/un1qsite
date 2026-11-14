@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="un1q — разработчик. Сайты, сервисы и системы под ключ: от первого экрана до сдачи проекта.">
+  <title>un1q — разработка сайтов и систем</title>
+  <!-- Оригинальная иконка молнии favicon.svg -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Cpath d='M40 8.5 29.2 30.2h8.4L26.4 56' fill='none' stroke='%23fff' stroke-width='5.5' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E">
+  <!-- Оригинальный шрифт Unbounded:wght@700 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700&display=swap">
+  <!-- Tailwind CDN (preflight отключен, чтобы не конфликтовать с оригинальным CSS) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: false }
+    };
+  </script>
+
+  <!-- ОРИГИНАЛЬНЫЕ СТИЛИ: assets/index-T6Tp-2a6.css (1-в-1) -->
+  <style>
+    @property --ink {
+      syntax: "<color>";
+      inherits: true;
+      initial-value: #fff;
+    }
+    :root {
+      --ease: cubic-bezier(.02, .84, .04, .98);
+      --font: "Unbounded", "Arial Black", sans-serif;
+      --pad: 50px;
+      --flip: 1.1s;
+    }
+    * {
+      box-sizing: border-box;
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    html {
+      -webkit-text-size-adjust: 100%;
+      background: #000;
+    }
+    html body {
+      max-width: 100%;
+      margin: 0;
+      overflow-x: clip;
+      background: 0 0 !important;
+    }
+    main {
+      overflow-x: clip;
+    }
+    body {
+      --ink: #fff;
+      color: var(--ink);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizelegibility;
+      font-synthesis: none;
+      transition: --ink var(--flip) var(--ease);
+      margin: 0;
+      font-weight: 700;
+    }
+    body.light {
+      --ink: #000;
+    }
+    body.locked {
+      height: 100vh;
+      overflow: hidden;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      background: 0 0;
+      border: 0;
+      padding: 0;
+    }
+    ::selection {
+      color: #000;
+      background: #fff;
+    }
+    body.light ::selection {
+      color: #fff;
+      background: #000;
+    }
+    :focus-visible {
+      outline-offset: 4px;
+      outline: 1px solid;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    .muted {
+      color: color-mix(in srgb, var(--ink) 60%, transparent);
+    }
+    .paper {
+      z-index: -3;
+      background: #000;
+      position: fixed;
+      inset: 0;
+    }
+    .paper:after {
+      content: "";
+      transition: clip-path var(--flip) var(--ease);
+      background: #fff;
+      position: absolute;
+      inset: 0;
+    }
+    .films {
+      z-index: -2;
+      transition: opacity var(--flip) var(--ease);
+      position: fixed;
+      inset: -8%;
+    }
+    body.light .films {
+      opacity: 0;
+    }
+    .films__drift {
+      position: absolute;
+      inset: 0;
+      transform: scale(1.06);
+    }
+    body.on .films__drift {
+      animation: 32s ease-in-out infinite alternate drift;
+    }
+    .film {
+      object-fit: cover;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 1.2s var(--ease);
+      position: absolute;
+      inset: 0;
+    }
+    .film.is-front {
+      opacity: 1;
+    }
+    @keyframes drift {
+      0% {
+        transform: scale(1.06) translate(0);
+      }
+      to {
+        transform: scale(1.14) translate(-1.4%, -.8%);
+      }
+    }
+    .veil {
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity var(--flip) var(--ease);
+      background: linear-gradient(#000000b0 0%, #00000020 26% 55%, #000000d0 100%), radial-gradient(#0000 30%, #0000009e 100%);
+      position: fixed;
+      inset: 0;
+    }
+    body.light .veil {
+      opacity: 0;
+    }
+    .grain {
+      z-index: 30;
+      pointer-events: none;
+      opacity: .14;
+      mix-blend-mode: overlay;
+      filter: grayscale();
+      background: var(--noise-bg, url(https://estk.lol/noise.png)) 0 0 / 180px 180px;
+      width: 180%;
+      height: 180%;
+      animation: 1.2s steps(3, end) infinite grain;
+      position: fixed;
+      inset: -40%;
+    }
+    @keyframes grain {
+      0% { transform: translate(0); }
+      20% { transform: translate(-3%, -2%); }
+      40% { transform: translate(4%, 2%); }
+      60% { transform: translate(-2%, 4%); }
+      80% { transform: translate(3%, -3%); }
+      to { transform: translateY(2%); }
+    }
+    .bar {
+      z-index: 21;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      height: 2px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .bar i {
+      transform-origin: 0;
+      background: #fff;
+      height: 100%;
+      display: block;
+      transform: scaleX(0);
+    }
+    .top {
+      z-index: 20;
+      padding: calc(var(--pad) * .7) var(--pad);
+      color: #fff;
+      mix-blend-mode: difference;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      opacity: 0;
+      filter: blur(20px);
+      transition: opacity 1.2s var(--ease), filter 1.4s var(--ease);
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      font-size: 14px;
+      display: grid;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    body.on .top {
+      opacity: 1;
+      filter: none;
+    }
+    .top__logo {
+      justify-self: start;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      display: inline-flex;
+    }
+    .top__logo svg {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 5px;
+      stroke-linejoin: miter;
+      stroke-linecap: square;
+      width: 22px;
+      height: 22px;
+    }
+    .top__idx {
+      opacity: .7;
+      gap: .8em;
+      display: inline-flex;
+    }
+    .top__idx b {
+      font-weight: 700;
+    }
+    .arr {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 5px;
+      stroke-linejoin: miter;
+      stroke-linecap: square;
+      width: 1em;
+      height: 1em;
+      transition: transform .5s var(--ease);
+      flex: none;
+      overflow: visible;
+    }
+    .top__tg {
+      transition: opacity .3s var(--ease);
+      justify-self: end;
+      align-items: center;
+      gap: .5em;
+      display: inline-flex;
+    }
+    .top__tg .arr {
+      width: 1.1em;
+      height: 1.1em;
+    }
+    .top__tg:hover .arr {
+      transform: translate(2px, -2px);
+    }
+    .top__tg:hover {
+      opacity: .5;
+    }
+    audio {
+      display: none;
+    }
+    .sec {
+      padding: 20vh var(--pad);
+      min-height: 100vh;
+      position: relative;
+    }
+    .kicker {
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--ink) 55%, transparent);
+      margin: 0 0 5vh;
+      font-size: 12px;
+    }
+    .huge {
+      letter-spacing: -.04em;
+      margin: 0;
+      font-size: clamp(30px, 6.2vw, 104px);
+      font-weight: 700;
+      line-height: .98;
+    }
+    .huge .rise {
+      display: block;
+    }
+    .mega {
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      margin: 0;
+      font-size: clamp(90px, 26vw, 460px);
+      font-weight: 700;
+      line-height: .8;
+    }
+    .rise {
+      opacity: 0;
+      filter: blur(24px);
+      transition: opacity 1.2s var(--ease), filter 1.4s var(--ease), transform 1.3s var(--ease);
+      transition-delay: var(--d, 0s);
+      transform: translateY(28px);
+    }
+    .rise.in {
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+    .huge .rise:nth-child(2) {
+      --d: .12s;
+    }
+    .hero {
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 12vh;
+      display: flex;
+    }
+    .mark {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 4.6px;
+      stroke-linejoin: miter;
+      stroke-linecap: square;
+      filter: blur(22px) drop-shadow(0 0 30px #fff5);
+      opacity: 0;
+      width: 84px;
+      height: 84px;
+      transition: opacity 1.4s var(--ease), filter 1.6s var(--ease);
+      margin: -42px 0 0 -42px;
+      position: absolute;
+      top: 36%;
+      left: 50%;
+      overflow: visible;
+    }
+    body.on .mark {
+      opacity: 1;
+      filter: blur(0px) drop-shadow(0 0 36px #ffffff40);
+    }
+    .hero__sub {
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--ink) 70%, transparent);
+      margin: 3vh 0 0;
+      font-size: clamp(12px, 1.3vw, 18px);
+    }
+    .scroll {
+      right: var(--pad);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      display: flex;
+      position: absolute;
+      bottom: 12vh;
+    }
+    .scroll span {
+      writing-mode: vertical-rl;
+    }
+    .scroll i {
+      width: 1px;
+      height: 70px;
+      animation: drip 2s var(--ease) infinite;
+      transform-origin: 0 0;
+      background: linear-gradient(#fff, #fff0);
+    }
+    @keyframes drip {
+      0% { transform: scaleY(0); }
+      60% { opacity: 1; transform: scaleY(1); }
+      to { opacity: 0; transform: scaleY(1); }
+    }
+    .statement {
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+    }
+    .big {
+      letter-spacing: -.04em;
+      max-width: 20ch;
+      margin: 0;
+      font-size: clamp(28px, 5.6vw, 92px);
+      line-height: 1.04;
+    }
+    .scrub .w {
+      opacity: .1;
+      filter: blur(14px);
+      display: inline-block;
+      transform: translateY(.15em);
+    }
+    .list {
+      border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      margin-top: 14vh;
+    }
+    .item {
+      border-bottom: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      align-items: end;
+      gap: 5vw;
+      padding: 5vh 0;
+      display: grid;
+    }
+    .item h3 {
+      letter-spacing: -.05em;
+      transition: transform .8s var(--ease), filter .6s var(--ease);
+      margin: 0;
+      font-size: clamp(34px, 7.4vw, 130px);
+      line-height: .9;
+    }
+    .item h3 sup {
+      letter-spacing: .1em;
+      vertical-align: top;
+      opacity: .55;
+      margin-right: .4em;
+      font-size: .12em;
+      position: relative;
+      top: .8em;
+    }
+    .item p {
+      max-width: 40ch;
+      color: color-mix(in srgb, var(--ink) 62%, transparent);
+      margin: 0;
+      font-size: clamp(12px, 1vw, 15px);
+      line-height: 1.5;
+    }
+    .list:hover .item {
+      opacity: .35;
+      filter: blur(3px);
+    }
+    .list .item {
+      transition: opacity .5s var(--ease), filter .5s var(--ease);
+    }
+    .list:hover .item:hover {
+      opacity: 1;
+      filter: none;
+    }
+    .list .item:hover h3 {
+      transform: translate(2vw);
+    }
+    .cloud {
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14vh;
+      display: flex;
+    }
+    .cloud .chip {
+      border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent);
+      letter-spacing: -.01em;
+      transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+      border-radius: 99px;
+      padding: 14px 22px;
+      font-size: clamp(12px, 1.1vw, 16px);
+    }
+    .cloud .chip:hover {
+      background: var(--ink);
+    }
+    .cloud .chip:hover span {
+      color: #fff;
+      mix-blend-mode: difference;
+    }
+    .cloud .chip span {
+      display: block;
+    }
+    .approach {
+      padding-bottom: 0;
+    }
+    .steps {
+      position: relative;
+    }
+    .step {
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 12vh 0;
+      display: flex;
+      position: sticky;
+      top: 0;
+    }
+    .step .n {
+      letter-spacing: .1em;
+      color: color-mix(in srgb, var(--ink) 55%, transparent);
+      font-size: clamp(14px, 1.2vw, 18px);
+    }
+    .step h3 {
+      letter-spacing: -.025em;
+      text-transform: uppercase;
+      margin: 2vh 0 3vh;
+      font-size: clamp(60px, 11.5vw, 230px);
+      line-height: .85;
+      transition: filter .2s linear, opacity .2s linear;
+    }
+    .step p {
+      max-width: 38ch;
+      color: color-mix(in srgb, var(--ink) 70%, transparent);
+      margin: 0;
+      font-size: clamp(13px, 1.2vw, 18px);
+      line-height: 1.45;
+    }
+    .works {
+      border-top: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      margin: 12vh 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .works li {
+      border-bottom: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+      transition: opacity .5s var(--ease), filter .5s var(--ease);
+    }
+    .works:hover li {
+      opacity: .25;
+      filter: blur(4px);
+    }
+    .works:hover li:hover {
+      opacity: 1;
+      filter: none;
+    }
+    .works a {
+      grid-template-columns: 60px minmax(0, 1fr) minmax(0, .7fr) 40px;
+      align-items: center;
+      gap: 2vw;
+      padding: 3.4vh 0;
+      display: grid;
+    }
+    .works .n {
+      letter-spacing: .06em;
+      opacity: .55;
+      font-size: 12px;
+    }
+    .works b {
+      letter-spacing: -.05em;
+      transition: transform .8s var(--ease);
+      font-size: clamp(28px, 6vw, 100px);
+      line-height: .95;
+    }
+    .works em {
+      color: color-mix(in srgb, var(--ink) 60%, transparent);
+      font-size: clamp(11px, .95vw, 14px);
+      font-style: normal;
+      line-height: 1.4;
+    }
+    .works .go {
+      transition: transform .6s var(--ease);
+      justify-content: flex-end;
+      font-size: clamp(20px, 2.4vw, 40px);
+      display: flex;
+    }
+    .works a:hover b {
+      transform: translate(1.5vw);
+    }
+    .works a:hover .go {
+      transform: translate(6px, -6px);
+    }
+    .contact {
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 16vh;
+      display: flex;
+    }
+    .mail {
+      letter-spacing: -.05em;
+      max-width: 100%;
+      transition: opacity .35s var(--ease), filter .5s var(--ease);
+      align-self: flex-start;
+      align-items: center;
+      gap: .2em;
+      margin-top: 8vh;
+      font-size: clamp(20px, 6.2vw, 110px);
+      line-height: .95;
+      display: inline-flex;
+    }
+    .mail.in:hover {
+      opacity: .5;
+      filter: blur(3px);
+    }
+    .mail span {
+      transition: transform .6s var(--ease);
+      font-size: .62em;
+      display: inline-flex;
+    }
+    .mail:hover span {
+      transform: translate(.12em, -.12em);
+    }
+    .domain {
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--ink) 40%, transparent);
+      margin: 8vh 0 0;
+      font-size: 12px;
+    }
+    .gate {
+      z-index: 50;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 1.2s var(--ease), visibility 1.2s;
+      background: #000;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      display: flex;
+      position: fixed;
+      inset: 0;
+    }
+    .gate__mark {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 4.6px;
+      stroke-linejoin: miter;
+      stroke-linecap: square;
+      width: 88px;
+      height: 88px;
+      animation: gate-in 2.4s var(--ease) both, breathe 5s 2.4s ease-in-out infinite;
+      overflow: visible;
+    }
+    .gate__hint {
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: #ffffff9e;
+      animation: gate-in 2.4s .4s var(--ease) both;
+      font-size: 11px;
+    }
+    @keyframes gate-in {
+      0% { opacity: 0; filter: blur(36px); }
+      to { opacity: 1; filter: blur(0px); }
+    }
+    @keyframes breathe {
+      50% { filter: blur(2px); opacity: .7; }
+    }
+    .gate.is-gone {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .gate.is-gone .gate__mark,
+    .gate.is-gone .gate__hint {
+      filter: blur(40px);
+      transition: filter 1.1s var(--ease);
+    }
+    @media (width <= 900px) {
+      :root { --pad: 22px; }
+      .top { font-size: 11px; grid-template-columns: 1fr auto; }
+      .top__logo { font-size: 15px; }
+      .top__idx { display: none; }
+      .player { bottom: 20px; right: var(--pad); }
+      .sec { padding: 16vh var(--pad); }
+      .scroll { display: none; }
+      .mark { width: 64px; height: 64px; margin: -32px 0 0 -32px; top: 32%; }
+      .item { grid-template-columns: 1fr; gap: 2vh; }
+      .list:hover .item, .works:hover li { opacity: 1; filter: none; }
+      .works a { grid-template-columns: 34px minmax(0, 1fr) 24px; gap: 12px; grid-template-rows: auto auto; }
+      .works em { grid-area: 2 / 2 / auto / 3; }
+      .works .go { grid-area: 1 / 3; }
+      .step h3 { font-size: 11vw; }
+      .mega { font-size: 23.5vw; }
+      .mail { overflow-wrap: anywhere; font-size: 5.1vw; }
+      .huge { font-size: clamp(28px, 8.4vw, 60px); }
+      .item h3 { font-size: clamp(30px, 10vw, 70px); }
+      .works b { overflow-wrap: anywhere; font-size: clamp(24px, 8vw, 50px); }
+      .kicker { margin-top: 6vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, :before, :after {
+        transition: none !important;
+        animation: none !important;
+      }
+      .rise, .scrub .w {
+        opacity: 1;
+        filter: none;
+        transform: none;
+      }
+    }
+    .fx {
+      z-index: -1;
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+    }
+    .spot {
+      background: radial-gradient(closest-side, color-mix(in srgb, var(--ink) 15%, transparent), transparent);
+      will-change: transform;
+      border-radius: 50%;
+      width: 70vmax;
+      height: 70vmax;
+      margin: -35vmax 0 0 -35vmax;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .paper:after {
+      clip-path: circle(0% at var(--px, 50%) var(--py, 100%));
+    }
+    body.light .paper:after {
+      clip-path: circle(160% at var(--px, 50%) var(--py, 100%));
+    }
+    .rings, .dots {
+      opacity: 0;
+      transition: opacity 1.4s var(--ease);
+      position: absolute;
+      inset: 0;
+    }
+    .rings i {
+      border: 1px solid color-mix(in srgb, var(--ink) 38%, transparent);
+      opacity: 0;
+      border-radius: 50%;
+      width: 60vmin;
+      height: 60vmin;
+      margin: -30vmin 0 0 -30vmin;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    body[data-scene=about] .rings i {
+      animation: 9s linear infinite ring;
+    }
+    body[data-scene=about] .rings i:first-child { animation-delay: 1.1s; }
+    body[data-scene=about] .rings i:nth-child(2) { animation-delay: 3.35s; }
+    body[data-scene=about] .rings i:nth-child(3) { animation-delay: 5.6s; }
+    body[data-scene=about] .rings i:nth-child(4) { animation-delay: 7.85s; }
+    @keyframes ring {
+      0% { opacity: 0; transform: scale(.15); }
+      15% { opacity: 1; }
+      to { opacity: 0; transform: scale(3); }
+    }
+    body[data-scene=about] .rings {
+      opacity: 1;
+      transition: opacity .6s .9s var(--ease);
+    }
+    .dots {
+      --tile: 56px;
+      --dx: 560px;
+      --dy: 280px;
+      overflow: hidden;
+      -webkit-mask-image: radial-gradient(#000 20%, #0000 72%);
+      mask-image: radial-gradient(#000 20%, #0000 72%);
+    }
+    .dots i {
+      left: calc(var(--dx) * -1);
+      top: calc(var(--dy) * -1);
+      background-image: radial-gradient(color-mix(in srgb, var(--ink) 38%, transparent) 1.6px, transparent 2px);
+      background-size: var(--tile) var(--tile);
+      animation: 40s linear infinite drift-dots;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+    @keyframes drift-dots {
+      to { transform: translate3d(var(--dx), var(--dy), 0); }
+    }
+    body[data-scene=approach] .dots {
+      opacity: 1;
+    }
+    .bolt2 {
+      aspect-ratio: 1;
+      fill: none;
+      height: 120vh;
+      stroke: var(--ink);
+      stroke-width: .11px;
+      stroke-linejoin: miter;
+      stroke-linecap: butt;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+      margin: -60vh 0 0 -60vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      overflow: visible;
+      transform: translate(34vw);
+    }
+    .bolt2 path {
+      stroke-dasharray: 100 100;
+      stroke-dashoffset: 100px;
+      transition: stroke-dashoffset .1s;
+    }
+    body[data-scene=contact] .bolt2 {
+      opacity: .3;
+    }
+    body[data-scene=contact] .bolt2 path {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 2.6s var(--ease);
+    }
+    @media (width <= 900px) {
+      .bolt2 { height: 90vh; margin: -45vh 0 0 -45vh; transform: none; }
+      .rings i { width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; }
+      .dots { --tile: 44px; --dx: 528px; --dy: 264px; }
+    }
+    .boltwrap {
+      aspect-ratio: 1;
+      height: 150vh;
+      transition: transform 1s var(--ease), opacity 1.2s .2s var(--ease), filter 1s var(--ease);
+      margin: -75vh 0 0 -75vh;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    .bolt {
+      fill: none;
+      stroke-linejoin: miter;
+      stroke-linecap: square;
+      width: 100%;
+      height: 100%;
+      animation: 9s ease-in-out infinite float;
+      display: block;
+      overflow: visible;
+    }
+    .bolt .b1 {
+      stroke: color-mix(in srgb, var(--ink) 24%, transparent);
+      stroke-width: 1.5px;
+      vector-effect: non-scaling-stroke;
+    }
+    .bolt .b2, .bolt .b2g {
+      stroke: var(--ink);
+      stroke-dasharray: 14 86;
+      animation: 3.4s cubic-bezier(.6, 0, .3, 1) infinite run;
+    }
+    .bolt .b2 {
+      stroke-width: .16px;
+      stroke-linecap: butt;
+    }
+    .bolt .b2g {
+      stroke-width: var(--w);
+      opacity: var(--o);
+      stroke-linecap: round;
+    }
+    @keyframes run {
+      0% { stroke-dashoffset: 14px; }
+      to { stroke-dashoffset: -86px; }
+    }
+    @keyframes float {
+      0%, to { transform: translateY(-1.4vh) rotate(-1.2deg); }
+      50% { transform: translateY(1.4vh) rotate(1.2deg); }
+    }
+    body:not([data-scene=hero]) .boltwrap {
+      opacity: 0;
+      filter: blur(10px);
+      transition: transform 2s cubic-bezier(.65, 0, .25, 1), opacity .9s .85s var(--ease), filter 1.2s .5s var(--ease);
+      transform: rotate(90deg) scale(.12);
+    }
+    .grid, .frames {
+      opacity: 0;
+      transition: opacity 1.4s var(--ease);
+      position: absolute;
+      inset: 0;
+    }
+    .grid {
+      background-image: linear-gradient(color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1px);
+      background-position: 50%;
+      background-size: 96px 96px;
+      -webkit-mask-image: radial-gradient(#000 25%, #0000 78%);
+      mask-image: radial-gradient(#000 25%, #0000 78%);
+    }
+    .grid:after {
+      content: "";
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--ink) 14%, transparent) 85%, color-mix(in srgb, var(--ink) 40%, transparent));
+      border-right: 1px solid color-mix(in srgb, var(--ink) 55%, transparent);
+      width: 30vw;
+      animation: 7s cubic-bezier(.5, 0, .2, 1) infinite sweep;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -30vw;
+    }
+    @keyframes sweep {
+      0% { transform: translate(0); }
+      70%, to { transform: translate(130vw); }
+    }
+    body[data-scene=services] .grid {
+      opacity: 1;
+    }
+    .frames i {
+      border: 1px solid color-mix(in srgb, var(--ink) 34%, transparent);
+      animation: linear infinite rise-win;
+      animation-duration: var(--t);
+      animation-delay: var(--dl);
+      left: var(--x);
+      width: var(--w);
+      height: var(--h);
+      border-radius: 10px;
+      display: block;
+      position: absolute;
+      top: 0;
+    }
+    .frames i:before {
+      content: "";
+      border-bottom: 1px solid color-mix(in srgb, var(--ink) 34%, transparent);
+      background: radial-gradient(circle at 14px 13px, color-mix(in srgb, var(--ink) 45%, transparent) 3px, transparent 3.5px), radial-gradient(circle at 28px 13px, color-mix(in srgb, var(--ink) 45%, transparent) 3px, transparent 3.5px), radial-gradient(circle at 42px 13px, color-mix(in srgb, var(--ink) 45%, transparent) 3px, transparent 3.5px);
+      height: 26px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .frames i:after {
+      content: "";
+      background: repeating-linear-gradient(transparent 0 16px, color-mix(in srgb, var(--ink) 16%, transparent) 16px 17px);
+      position: absolute;
+      inset: 44px 16px 16px;
+      -webkit-mask-image: linear-gradient(90deg, #000 55%, #0000);
+      mask-image: linear-gradient(90deg, #000 55%, #0000);
+    }
+    .frames i:first-child { --x: 6%; --w: 26vw; --h: 30vh; --t: 38s; --dl: -4s; }
+    .frames i:nth-child(2) { --x: 62%; --w: 30vw; --h: 36vh; --t: 46s; --dl: -20s; }
+    .frames i:nth-child(3) { --x: 34%; --w: 20vw; --h: 24vh; --t: 34s; --dl: -14s; }
+    .frames i:nth-child(4) { --x: 74%; --w: 18vw; --h: 22vh; --t: 30s; --dl: -2s; }
+    .frames i:nth-child(5) { --x: 14%; --w: 22vw; --h: 28vh; --t: 42s; --dl: -30s; }
+    .frames i:nth-child(6) { --x: 48%; --w: 24vw; --h: 30vh; --t: 50s; --dl: -36s; }
+    @keyframes rise-win {
+      0% { transform: translateY(112vh); }
+      to { transform: translateY(-60vh); }
+    }
+    body[data-scene=portfolio] .frames {
+      opacity: 1;
+    }
+    @media (width <= 900px) {
+      .boltwrap { height: 110vh; margin: -55vh 0 0 -55vh; }
+      .grid { background-size: 64px 64px; }
+      .frames i { width: 60vw !important; height: 26vh !important; }
+      .frames i:nth-child(odd) { --x: -6%; }
+      .frames i:nth-child(2n) { --x: 44%; }
+    }
+    .player {
+      z-index: 40;
+      right: var(--pad);
+      bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+      color: var(--ink);
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+      background: color-mix(in srgb, var(--ink) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+      -webkit-backdrop-filter: blur(26px) saturate(1.3);
+      backdrop-filter: blur(26px) saturate(1.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s .3s var(--ease), transform 1.2s .3s var(--ease), border-color .4s var(--ease);
+      border-radius: 99px;
+      align-items: center;
+      gap: 14px;
+      padding: 6px 22px 6px 6px;
+      display: flex;
+      position: fixed;
+      transform: translateY(14px);
+    }
+    body.on .player {
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+    .player:hover {
+      border-color: color-mix(in srgb, var(--ink) 55%, transparent);
+    }
+    .player:active {
+      transition-duration: .15s;
+      transition-delay: 0s;
+      transform: scale(.96);
+    }
+    .disc {
+      flex: none;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      display: grid;
+      position: relative;
+    }
+    .ring {
+      fill: none;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+    .ring__track, .ring__prog {
+      stroke-width: 1.5px;
+    }
+    .ring__track {
+      stroke: color-mix(in srgb, var(--ink) 22%, transparent);
+    }
+    .ring__prog {
+      stroke: var(--ink);
+      stroke-linecap: round;
+      stroke-dasharray: 141.37;
+      stroke-dashoffset: 141.37px;
+      transform-origin: 24px 24px;
+      transform: rotate(-90deg);
+    }
+    .eq {
+      pointer-events: none;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      height: 22px;
+      display: flex;
+    }
+    .eq i {
+      background: var(--ink);
+      transform-origin: 50%;
+      width: 3px;
+      height: 22px;
+      transition: transform .5s var(--ease);
+      border-radius: 2px;
+      display: block;
+      transform: scaleY(.14);
+    }
+    .player.is-live .eq i {
+      animation: 1s ease-in-out infinite eq;
+    }
+    .eq i:first-child { animation-duration: .9s; }
+    .eq i:nth-child(2) { animation-duration: 1.15s; animation-delay: -.3s; }
+    .eq i:nth-child(3) { animation-duration: .8s; animation-delay: -.55s; }
+    .eq i:nth-child(4) { animation-duration: 1.3s; animation-delay: -.15s; }
+    .eq i:nth-child(5) { animation-duration: 1s; animation-delay: -.7s; }
+    @keyframes eq {
+      0%, to { transform: scaleY(.2); }
+      50% { transform: scaleY(1); }
+    }
+    .pl {
+      text-align: left;
+      pointer-events: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      display: flex;
+    }
+    .pl b {
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    .pl em {
+      letter-spacing: .06em;
+      color: color-mix(in srgb, var(--ink) 60%, transparent);
+      font-size: 10px;
+      font-style: normal;
+    }
+    @media (width <= 900px) {
+      .player {
+        right: 16px;
+        bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+        gap: 12px;
+        padding-right: 18px;
+      }
+    }
+    .gate {
+      transition: opacity .4s linear 2.4s, visibility 0s 2.8s;
+    }
+    .gate.is-gone {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .4s linear 2.4s, visibility 0s 2.8s;
+    }
+    .gate.no-clip.is-gone {
+      transition: opacity .9s linear .5s, visibility 0s 1.4s;
+    }
+    .gate.is-gone .gate__mark {
+      opacity: 0;
+      filter: blur(18px);
+      transition: opacity .55s .1s ease-in, filter .6s var(--ease), transform .7s var(--ease);
+      animation: none;
+      transform: scale(2.2);
+    }
+    .gate.is-gone .gate__hint {
+      opacity: 0;
+      filter: blur(12px);
+      transition: opacity .3s, filter .4s;
+      animation: none;
+    }
+    .flash {
+      z-index: 45;
+      pointer-events: none;
+      opacity: 0;
+      background: radial-gradient(circle, #fff, #fffc 30%, #fff0 70%);
+      position: fixed;
+      inset: 0;
+    }
+    body.on .flash {
+      animation: 1s ease-out .1s both flash;
+    }
+    @keyframes flash {
+      0% { opacity: 0; }
+      18% { opacity: .55; }
+      to { opacity: 0; }
+    }
+    .mega .ch {
+      opacity: 0;
+      filter: blur(36px);
+      transition: opacity 1s var(--ease), filter 1.4s var(--ease), transform 1.5s var(--ease);
+      display: inline-block;
+      transform: translateY(55%) scale(1.06);
+    }
+    body.on .mega .ch {
+      opacity: 1;
+      filter: none;
+      transition-delay: calc(1.1s + var(--i) * .13s);
+      transform: none;
+    }
+    body:not(.on) .hero .rise,
+    body:not(.on) .hero .rise.in {
+      opacity: 0;
+      filter: blur(24px);
+      transform: translateY(28px);
+    }
+    .hero .rise {
+      transition-delay: calc(var(--d, 0s) + 1.9s);
+    }
+    body.on .mark {
+      transition-delay: .9s;
+    }
+    body.on .top {
+      transition-delay: 1.9s;
+    }
+    body.on .player {
+      transition-delay: 2.3s;
+    }
+    body.on .bar {
+      opacity: 1;
+    }
+    .bar {
+      opacity: 0;
+      transition: opacity 1s 2s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mega .ch {
+        opacity: 1;
+        filter: none;
+        transform: none;
+      }
+      .flash {
+        display: none;
+      }
+    }
+    .credit {
+      letter-spacing: .04em;
+      color: color-mix(in srgb, var(--ink) 55%, transparent);
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin: 12vh 0 0;
+      font-size: 11px;
+      display: flex;
+    }
+    .credit a {
+      color: color-mix(in srgb, var(--ink) 85%, transparent);
+      text-decoration: underline;
+      -webkit-text-decoration-color: color-mix(in srgb, var(--ink) 28%, transparent);
+      text-decoration-color: color-mix(in srgb, var(--ink) 28%, transparent);
+      text-underline-offset: 4px;
+      transition: color .2s, text-decoration-color .2s;
+    }
+    .credit a:hover {
+      color: var(--ink);
+      -webkit-text-decoration-color: var(--ink);
+      text-decoration-color: var(--ink);
+    }
+    .heart {
+      width: 14px;
+      height: 14px;
+      fill: var(--ink);
+      filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ink) 60%, transparent));
+      transform-origin: 50%;
+      flex: none;
+      animation: 1.6s ease-in-out infinite beat;
+    }
+    @keyframes beat {
+      0%, to { transform: scale(1); }
+      14% { transform: scale(1.28); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.2); }
+      70% { transform: scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .heart { animation: none; }
+    }
+    .bolt, .bolt .b2, .bolt .b2g, .dots i, .grid:after, .frames i {
+      animation-play-state: paused;
+    }
+    body[data-scene=hero] .bolt,
+    body[data-prev=hero] .bolt,
+    body[data-scene=hero] .bolt .b2,
+    body[data-prev=hero] .bolt .b2,
+    body[data-scene=hero] .bolt .b2g,
+    body[data-prev=hero] .bolt .b2g,
+    body[data-scene=approach] .dots i,
+    body[data-prev=approach] .dots i,
+    body[data-scene=services] .grid:after,
+    body[data-prev=services] .grid:after,
+    body[data-scene=portfolio] .frames i,
+    body[data-prev=portfolio] .frames i {
+      animation-play-state: running;
+    }
+  </style>
+</head>
+<body class="locked" data-scene="hero">
+
+  <div id="app">
+    <!-- ==========================================================
+         1. ФОНОВЫЕ СЛОИ (BgLayers из оригинального бандла)
+         ========================================================== -->
+    <div class="paper" aria-hidden="true"></div>
+
+    <div id="films-el" class="films" aria-hidden="true">
+      <div class="films__drift">
+        <video class="film is-front" data-film="0" data-lvl="c" src="https://estk.lol/bg-main-c.webm" preload="auto" muted playsinline loop></video>
+        <video class="film" data-film="0" data-lvl="a" src="https://estk.lol/bg-main-a.webm" preload="auto" muted playsinline loop></video>
+        <video class="film" data-film="0" data-lvl="b" src="https://estk.lol/bg-main-b.webm" preload="auto" muted playsinline loop></video>
+        <video class="film" data-film="1" data-lvl="b" src="https://estk.lol/bg-second-b.webm" preload="auto" muted playsinline loop></video>
+        <video class="film" data-film="2" data-lvl="b" src="https://estk.lol/bg-third-b.webm" preload="auto" muted playsinline loop></video>
+      </div>
+    </div>
+
+    <div class="veil" aria-hidden="true"></div>
+
+    <!-- Интерактивные векторные и фоновые эффекты (.fx) -->
+    <div class="fx" aria-hidden="true">
+      <div id="spot-el" class="spot"></div>
+      <div class="boltwrap">
+        <svg class="bolt" viewBox="0 0 64 64">
+          <path class="b1" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+          <path class="b2g" pathLength="100" style="--w:0.6;--o:0.06;" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+          <path class="b2g" pathLength="100" style="--w:0.48;--o:0.1;" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+          <path class="b2g" pathLength="100" style="--w:0.37;--o:0.16;" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+          <path class="b2g" pathLength="100" style="--w:0.27;--o:0.22;" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+          <path class="b2" pathLength="100" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+        </svg>
+      </div>
+      <div class="rings"><i></i><i></i><i></i><i></i></div>
+      <div class="dots"><i></i></div>
+      <div class="grid"></div>
+      <div class="frames"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <svg class="bolt2" viewBox="0 0 64 64">
+        <path pathLength="100" d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+      </svg>
+    </div>
+
+    <div class="flash" aria-hidden="true"></div>
+    <div id="grain-el" class="grain" aria-hidden="true"></div>
+
+    <!-- ==========================================================
+         2. ВЕРХНЯЯ ЛИНИЯ ПРОГРЕССА И ШАПКА (TopBar)
+         ========================================================== -->
+    <div class="bar" aria-hidden="true">
+      <i id="progress-bar-fill" style="transform: scaleX(0)"></i>
+    </div>
+
+    <header class="top">
+      <a href="#hero" class="top__logo" aria-label="un1q">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+        </svg>un1q
+      </a>
+      <span class="top__idx">
+        <b id="top-idx-num">01</b> <span id="top-idx-name">Главная</span>
+      </span>
+      <a class="top__tg" href="https://t.me/hvhdirector" target="_blank" rel="noopener noreferrer">
+        Написать
+        <svg class="arr" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M12 52 30 34h-7.5L50 14M30 12h22v22"></path>
+        </svg>
+      </a>
+    </header>
+
+    <!-- ==========================================================
+         3. КНОПКА ЗВУКА И ЭКВАЛАЙЗЕР (SoundPlayer)
+         ========================================================== -->
+    <button id="sound-player-btn" class="player" type="button" aria-label="Включить звук" aria-pressed="false">
+      <span class="disc">
+        <svg class="ring" viewBox="0 0 48 48" aria-hidden="true">
+          <circle class="ring__track" cx="24" cy="24" r="22.5"></circle>
+          <circle id="ring-prog-circle" class="ring__prog" cx="24" cy="24" r="22.5" style="stroke-dashoffset: 141.37"></circle>
+        </svg>
+        <span class="eq" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </span>
+      </span>
+      <span class="pl">
+        <b>Звук</b>
+        <em id="sound-status-text">Включён</em>
+      </span>
+    </button>
+
+    <!-- ==========================================================
+         4. ОСНОВНОЙ КОНТЕНТ: ВСЕ 6 СЕКЦИЙ (АДАПТИРОВАНО ПОД UN1Q)
+         ========================================================== -->
+    <main>
+      <!-- Секция 01: Главная (Hero) -->
+      <section id="hero" class="sec hero" data-name="Главная" data-theme="dark" data-film="0">
+        <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+        </svg>
+        <h1 class="mega" aria-label="un1q">
+          <span class="ch" style="--i:0" aria-hidden="true">u</span><span class="ch" style="--i:1" aria-hidden="true">n</span><span class="ch" style="--i:2" aria-hidden="true">1</span><span class="ch" style="--i:3" aria-hidden="true">q</span>
+        </h1>
+        <p class="hero__sub rise" data-reveal style="--d:0.25s">Сайты, сервисы и системы. Делаю один, от идеи до запуска.</p>
+        <div class="scroll rise" data-reveal style="--d:0.5s">
+          <span>Листайте</span>
+          <i></i>
+        </div>
+      </section>
+
+      <!-- Секция 02: Обо мне (About / ScrubText) -->
+      <section id="about" class="sec statement" data-name="Обо мне" data-theme="dark" data-film="1">
+        <p class="kicker rise" data-reveal>Обо мне</p>
+        <p id="scrub-text-el" class="scrub big" aria-label="un1q — это Hermann. Я придумываю и делаю сам. Один человек, от первого экрана до сдачи проекта."></p>
+      </section>
+
+      <!-- Секция 03: Услуги (Services — Light Theme) -->
+      <section id="services" class="sec services" data-name="Услуги" data-theme="light">
+        <p class="kicker rise" data-reveal>Услуги</p>
+        <h2 class="huge">
+          <span class="rise" data-reveal>Сайты и продукты.</span>
+          <span class="rise" data-reveal>От первого кадра до работающей системы.</span>
+        </h2>
+        <div class="list">
+          <article class="item rise" data-reveal style="--d:0s">
+            <h3><sup>01</sup>Сайты</h3>
+            <p>Один сильный кадр или длинная история. Картинка, шрифт, темп. Страница, которая не похожа на шаблон.</p>
+          </article>
+          <article class="item rise" data-reveal style="--d:0.05s">
+            <h3><sup>02</sup>Продукты</h3>
+            <p>Веб-приложения, которыми реально пользуются. Состояния, скорость и логика без лишнего шума.</p>
+          </article>
+          <article class="item rise" data-reveal style="--d:0.1s">
+            <h3><sup>03</sup>Интерфейсы</h3>
+            <p>Шрифт, композиция, анимация. Интерфейс ведёт себя как монтаж: пауза, акцент, переход.</p>
+          </article>
+          <article class="item rise" data-reveal style="--d:0.15s">
+            <h3><sup>04</sup>Бэкенд</h3>
+            <p>Серверная часть, автоматизация, деплой. Вы получаете репозиторий и работающий проект, а не папку с картинками.</p>
+          </article>
+        </div>
+        <div class="cloud">
+          <span class="chip rise" data-reveal style="--d:0s"><span>Любые API</span></span>
+          <span class="chip rise" data-reveal style="--d:0.06s"><span>Базы данных</span></span>
+          <span class="chip rise" data-reveal style="--d:0.12s"><span>Vue</span></span>
+          <span class="chip rise" data-reveal style="--d:0.18s"><span>PHP</span></span>
+          <span class="chip rise" data-reveal style="--d:0.24s"><span>Вёрстка</span></span>
+          <span class="chip rise" data-reveal style="--d:0.3s"><span>Лендинги</span></span>
+          <span class="chip rise" data-reveal style="--d:0s"><span>Интернет-магазины</span></span>
+          <span class="chip rise" data-reveal style="--d:0.06s"><span>Lua</span></span>
+          <span class="chip rise" data-reveal style="--d:0.12s"><span>C#</span></span>
+          <span class="chip rise" data-reveal style="--d:0.18s"><span>Приём платежей</span></span>
+          <span class="chip rise" data-reveal style="--d:0.24s"><span>Python</span></span>
+          <span class="chip rise" data-reveal style="--d:0.3s"><span>Боты и мессенджеры</span></span>
+          <span class="chip rise" data-reveal style="--d:0s"><span>Парсеры</span></span>
+        </div>
+      </section>
+
+      <!-- Секция 04: Как я работаю (Approach — Sticky Steps) -->
+      <section id="approach" class="sec approach" data-name="Как я работаю" data-theme="dark" data-film="2">
+        <p class="kicker rise" data-reveal>Как я работаю</p>
+        <div class="steps">
+          <article class="step">
+            <div class="step__in">
+              <span class="n rise" data-reveal>01 / 03</span>
+              <h3 class="rise" data-reveal>Образ</h3>
+              <p class="rise" data-reveal style="--d:0.15s">Сначала ощущение: что остаётся через три секунды и как страница дышит в движении.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__in">
+              <span class="n rise" data-reveal>02 / 03</span>
+              <h3 class="rise" data-reveal>Точность</h3>
+              <p class="rise" data-reveal style="--d:0.15s">Потом сетка, состояния и скорость. Если сайтом нельзя пользоваться, работа не закончена.</p>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step__in">
+              <span class="n rise" data-reveal>03 / 03</span>
+              <h3 class="rise" data-reveal>Сдача</h3>
+              <p class="rise" data-reveal style="--d:0.15s">Репозиторий, хостинг и короткая инструкция. Дальше проект живёт со мной или без меня.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Секция 05: Портфолио (Portfolio — Light Theme) -->
+      <section id="portfolio" class="sec portfolio" data-name="Портфолио" data-theme="light">
+        <p class="kicker rise" data-reveal>Портфолио</p>
+        <h2 class="huge">
+          <span class="rise" data-reveal>Проекты, которые уже работают.</span>
+        </h2>
+        <ul class="works">
+          <li class="rise" data-reveal>
+            <a href="https://emberlash.net/" target="_blank" rel="noopener noreferrer">
+              <span class="n">01</span>
+              <b>emberlash.lua</b>
+              <em>Флагманский Lua-скрипт для CS:GO (Gamesense &amp; Neverlose). Веб-платформа, облачный лоадер и личный кабинет.</em>
+              <span class="go"><svg class="arr" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 52 30 34h-7.5L50 14M30 12h22v22"></path></svg></span>
+            </a>
+          </li>
+          <li class="rise" data-reveal>
+            <a href="https://amnesia.plus/" target="_blank" rel="noopener noreferrer">
+              <span class="n">02</span>
+              <b>amnesia.plus</b>
+              <em>Приватный Lua-скрипт для Gamesense и Neverlose: кастомные анти-аимы, визуалы, билд-система и сайт продукта.</em>
+              <span class="go"><svg class="arr" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 52 30 34h-7.5L50 14M30 12h22v22"></path></svg></span>
+            </a>
+          </li>
+          <li class="rise" data-reveal>
+            <a href="https://evalate.com/" target="_blank" rel="noopener noreferrer">
+              <span class="n">03</span>
+              <b>evalate.com</b>
+              <em>Премиальный Lua-скрипт и экосистема для CS:GO (Gamesense &amp; Neverlose) с синхронизацией конфигов и веб-панелью.</em>
+              <span class="go"><svg class="arr" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 52 30 34h-7.5L50 14M30 12h22v22"></path></svg></span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Секция 06: Контакты (Contact) -->
+      <section id="contact" class="sec contact" data-name="Контакты" data-theme="dark" data-film="0">
+        <p class="kicker rise" data-reveal>Контакты</p>
+        <h2 class="huge">
+          <span class="rise" data-reveal>Пишите в Telegram. Отвечаю лично.</span>
+        </h2>
+        <a class="mail rise" data-reveal href="https://t.me/hvhdirector" target="_blank" rel="noopener noreferrer">
+          t.me/hvhdirector
+          <span><svg class="arr" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 52 30 34h-7.5L50 14M30 12h22v22"></path></svg></span>
+        </a>
+        <p class="domain rise" data-reveal>un1q.pub</p>
+        <p class="credit rise" data-reveal>
+          coded with
+          <svg class="heart" viewBox="0 0 24 24" aria-label="любовью" role="img">
+            <path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.4 2.6 4.5 6.4 4.5c2.2 0 3.8 1.2 5.6 3.3 1.8-2.1 3.4-3.3 5.6-3.3 3.8 0 5.5 3.9 4 7.2C19.5 16.4 12 21 12 21Z"></path>
+          </svg>
+          by <a href="https://t.me/hvhdirector" target="_blank" rel="noopener noreferrer">un1q</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- ==========================================================
+         5. ЭКРАН ВХОДА (EnterGate)
+         ========================================================== -->
+    <button id="enter-gate-btn" class="gate" type="button" aria-label="Войти" aria-hidden="false">
+      <svg class="gate__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M40 8.5 29.2 30.2h8.4L26.4 56"></path>
+      </svg>
+      <span class="gate__hint">Войти</span>
+    </button>
+  </div>
+
+  <!-- ==========================================================
+       ОРИГИНАЛЬНАЯ ЛОГИКА: assets/index-BMKOfkDv.js (1-в-1)
+       ========================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------------------------
+         0. ГЕНЕРАЦИЯ ТЕКСТУРЫ ШУМА (noise.png 180x180)
+         Гарантирует работу .grain даже без внешнего файла
+      ---------------------------------------------------------- */
+      try {
+        const noiseCanvas = document.createElement('canvas');
+        noiseCanvas.width = 180;
+        noiseCanvas.height = 180;
+        const nCtx = noiseCanvas.getContext('2d');
+        const imgData = nCtx.createImageData(180, 180);
+        const buf = imgData.data;
+        for (let i = 0; i < buf.length; i += 4) {
+          const v = 90 + Math.floor(Math.random() * 75);
+          buf[i] = v;
+          buf[i + 1] = v;
+          buf[i + 2] = v;
+          buf[i + 3] = 255;
+        }
+        nCtx.putImageData(imgData, 0, 0);
+        document.documentElement.style.setProperty('--noise-bg', `url(${noiseCanvas.toDataURL('image/png')})`);
+      } catch (e) {}
+
+      /* ----------------------------------------------------------
+         1. ГЛОБАЛЬНОЕ СОСТОЯНИЕ Q И РАСПИСАНИЕ КАДРОВ (mo / po)
+      ---------------------------------------------------------- */
+      const clamp = (val, min = 0, max = 1) => Math.min(max, Math.max(min, val));
+      const padIdx = (idx) => String(idx + 1).padStart(2, '0');
+
+      const Q = {
+        entered: false,
+        idx: 0,
+        scene: 'hero',
+        name: 'Главная',
+        light: false,
+        film: 0,
+        progress: 0
+      };
+
+      const scrollListeners = new Set();
+      let rafPending = false;
+
+      function flushScrollTasks() {
+        rafPending = false;
+        scrollListeners.forEach((fn) => fn());
+      }
+
+      function scheduleScrollTask() {
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(flushScrollTasks);
+        }
+      }
+
+      function onScrollOrResize(fn) {
+        scrollListeners.add(fn);
+        scheduleScrollTask();
+        return () => scrollListeners.delete(fn);
+      }
+
+      window.addEventListener('scroll', scheduleScrollTask, { passive: true });
+      window.addEventListener('resize', scheduleScrollTask);
+
+      /* ----------------------------------------------------------
+         2. WEB AUDIO API ЗВУКОВЫЕ ЭФФЕКТЫ ОРИГИНАЛА (Po / Mo / Fo / No)
+      ---------------------------------------------------------- */
+      let audioCtx = null;
+      let lastSwooshTime = 0;
+
+      function getAudioContext() {
+        if (audioCtx) return audioCtx;
+        try {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (Ctx) audioCtx = new Ctx();
+        } catch (e) {}
+        return audioCtx;
+      }
+
+      function withRunningContext(ctx, cb) {
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(cb, cb);
+        } else {
+          cb();
+        }
+      }
+
+      // Mo: Аккорд при входе на сайт (880Hz, 1318.51Hz, 1975.53Hz + обертоны + дилэй + фильтр шума)
+      function synthesizeEntranceChord(ctx, dest, startTime) {
+        const master = ctx.createGain();
+        master.gain.value = 0.9;
+
+        const delay = ctx.createDelay(0.5);
+        const feedback = ctx.createGain();
+        const lpFilter = ctx.createBiquadFilter();
+
+        delay.delayTime.value = 0.21;
+        feedback.gain.value = 0.34;
+        lpFilter.type = 'lowpass';
+        lpFilter.frequency.value = 2800;
+
+        master.connect(dest);
+        master.connect(delay);
+        delay.connect(lpFilter);
+        lpFilter.connect(feedback);
+        feedback.connect(delay);
+        lpFilter.connect(dest);
+
+        const notes = [
+          [880, 0, 0.032],
+          [1318.51, 0.11, 0.026],
+          [1975.53, 0.23, 0.02]
+        ];
+        const harmonics = [
+          [1, 1],
+          [2.01, 0.28],
+          [3.97, 0.08]
+        ];
+
+        notes.forEach(([freq, offset, amp]) => {
+          harmonics.forEach(([mult, weight]) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const t0 = startTime + offset;
+
+            osc.type = 'sine';
+            osc.frequency.value = freq * mult;
+
+            gain.gain.setValueAtTime(0.0001, t0);
+            gain.gain.exponentialRampToValueAtTime(amp * weight, t0 + 0.018);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.5 / mult + 0.5);
+
+            osc.connect(gain);
+            gain.connect(master);
+            osc.start(t0);
+            osc.stop(t0 + 2.2);
+          });
+        });
+
+        // Воздушный шумовой сוויп 500Hz -> 3600Hz
+        const len = Math.floor(ctx.sampleRate * 2.2);
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = ctx.createBufferSource();
+        const bp = ctx.createBiquadFilter();
+        const nGain = ctx.createGain();
+
+        noise.buffer = buf;
+        bp.type = 'bandpass';
+        bp.Q.value = 0.9;
+        bp.frequency.setValueAtTime(500, startTime);
+        bp.frequency.exponentialRampToValueAtTime(3600, startTime + 1.7);
+
+        nGain.gain.setValueAtTime(0.0001, startTime);
+        nGain.gain.exponentialRampToValueAtTime(0.02, startTime + 0.9);
+        nGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.1);
+
+        noise.connect(bp);
+        bp.connect(nGain);
+        nGain.connect(master);
+        noise.start(startTime);
+        noise.stop(startTime + 2.2);
+      }
+
+      // No: Шумовой переход при смене секций (650->2400Hz вниз, 2400->650Hz вверх)
+      function synthesizeSectionWhoosh(ctx, dest, startTime, isDown) {
+        const dur = 0.5;
+        const len = Math.floor(ctx.sampleRate * dur);
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = ctx.createBufferSource();
+        const bp = ctx.createBiquadFilter();
+        const lp = ctx.createBiquadFilter();
+        const gain = ctx.createGain();
+
+        noise.buffer = buf;
+        bp.type = 'bandpass';
+        bp.Q.value = 1.1;
+        lp.type = 'lowpass';
+        lp.frequency.value = 4200;
+
+        const [fStart, fEnd] = isDown ? [650, 2400] : [2400, 650];
+        bp.frequency.setValueAtTime(fStart, startTime);
+        bp.frequency.exponentialRampToValueAtTime(fEnd, startTime + dur * 0.9);
+
+        gain.gain.setValueAtTime(0.0001, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.06, startTime + dur * 0.38);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur);
+
+        noise.connect(bp);
+        bp.connect(lp);
+        lp.connect(gain);
+        gain.connect(dest);
+        noise.start(startTime);
+        noise.stop(startTime + dur + 0.05);
+      }
+
+      function playEnterSound() {
+        const ctx = getAudioContext();
+        if (ctx) {
+          withRunningContext(ctx, () => {
+            try {
+              synthesizeEntranceChord(ctx, ctx.destination, ctx.currentTime + 0.05);
+            } catch (e) {}
+          });
+        }
+      }
+
+      function playScrollTransitionSound(isDown) {
+        const ctx = audioCtx;
+        const now = performance.now();
+        if (!ctx || !wantMusic || now - lastSwooshTime < 350) return;
+        lastSwooshTime = now;
+        withRunningContext(ctx, () => {
+          try {
+            synthesizeSectionWhoosh(ctx, ctx.destination, ctx.currentTime + 0.02, isDown);
+          } catch (e) {}
+        });
+      }
+
+      /* ----------------------------------------------------------
+         3. МУЗЫКАЛЬНЫЙ ПЛЕЕР (/track.mp3 + Fallback Ambient Synth)
+      ---------------------------------------------------------- */
+      const trackAudio = new Audio('https://estk.lol/track.mp3');
+      trackAudio.loop = true;
+      trackAudio.preload = 'none';
+
+      let isMusicLive = false;
+      let wantMusic = true;
+      let fadeRaf = 0;
+      let errTimer = 0;
+      let usingFallbackSynth = false;
+      let fallbackInterval = null;
+      let fallbackStartTime = 0;
+      const RING_CIRCUMFERENCE = 141.37;
+
+      const playerBtn = document.getElementById('sound-player-btn');
+      const statusTextEl = document.getElementById('sound-status-text');
+      const ringProgEl = document.getElementById('ring-prog-circle');
+
+      function updatePlayerDOM(progressRatio) {
+        playerBtn.classList.toggle('is-live', isMusicLive);
+        playerBtn.setAttribute('aria-label', isMusicLive ? 'Выключить звук' : 'Включить звук');
+        playerBtn.setAttribute('aria-pressed', String(isMusicLive));
+        if (!errTimer) {
+          statusTextEl.textContent = isMusicLive ? 'Включён' : 'Выключен';
+        }
+        if (typeof progressRatio === 'number') {
+          const offset = RING_CIRCUMFERENCE * (1 - clamp(progressRatio, 0, 1));
+          ringProgEl.style.strokeDashoffset = String(offset);
+        }
+      }
+
+      // Фоновый атмосферный синтезатор на случай, если браузер/CORS блокирует внешний track.mp3
+      function startFallbackAmbientTrack() {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        usingFallbackSynth = true;
+        isMusicLive = true;
+        fallbackStartTime = performance.now();
+        updatePlayerDOM(0);
+
+        if (fallbackInterval) clearInterval(fallbackInterval);
+        let step = 0;
+        const notes = [110, 130.81, 146.83, 164.81, 196.00, 220.00, 164.81, 146.83];
+
+        fallbackInterval = setInterval(() => {
+          if (!isMusicLive || !wantMusic || document.hidden) return;
+          withRunningContext(ctx, () => {
+            const now = ctx.currentTime;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(notes[step % notes.length], now);
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(620, now);
+
+            gain.gain.setValueAtTime(0.0001, now);
+            gain.gain.exponentialRampToValueAtTime(0.045, now + 0.35);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(now);
+            osc.stop(now + 2.5);
+            step++;
+          });
+
+          const cycleProgress = ((performance.now() - fallbackStartTime) % 32000) / 32000;
+          updatePlayerDOM(cycleProgress);
+        }, 1200);
+      }
+
+      function stopFallbackAmbientTrack() {
+        if (fallbackInterval) {
+          clearInterval(fallbackInterval);
+          fallbackInterval = null;
+        }
+        isMusicLive = false;
+        updatePlayerDOM();
+      }
+
+      function fadeVolume(targetVol, durationMs, onComplete) {
+        cancelAnimationFrame(fadeRaf);
+        const startVol = trackAudio.volume;
+        const t0 = performance.now();
+        const step = (now) => {
+          const p = clamp((now - t0) / durationMs);
+          const eased = p * p * (3 - 2 * p);
+          try {
+            trackAudio.volume = startVol + (targetVol - startVol) * eased;
+          } catch (e) {}
+          if (p < 1) {
+            fadeRaf = requestAnimationFrame(step);
+          } else if (onComplete) {
+            onComplete();
+          }
+        };
+        fadeRaf = requestAnimationFrame(step);
+      }
+
+      function syncTrackState() {
+        if (usingFallbackSynth) return;
+        isMusicLive = !trackAudio.paused;
+        updatePlayerDOM();
+      }
+
+      ['play', 'pause', 'ended'].forEach((ev) => trackAudio.addEventListener(ev, syncTrackState));
+      trackAudio.addEventListener('timeupdate', () => {
+        if (trackAudio.duration) {
+          updatePlayerDOM(trackAudio.currentTime / trackAudio.duration);
+        }
+      });
+
+      function startMusic() {
+        try {
+          trackAudio.volume = 0;
+        } catch (e) {}
+        const playPromise = trackAudio.play();
+        return (playPromise && playPromise.then ? playPromise : Promise.resolve())
+          .then(() => {
+            usingFallbackSynth = false;
+            fadeVolume(0.22, 1400);
+            syncTrackState();
+          })
+          .catch(() => {
+            // Если внешний https://estk.lol/track.mp3 недоступен из-за CORS, бесшовно включаем встроенный эмбиент
+            startFallbackAmbientTrack();
+          });
+      }
+
+      function toggleMusic() {
+        if (usingFallbackSynth) {
+          if (isMusicLive) {
+            wantMusic = false;
+            stopFallbackAmbientTrack();
+            statusTextEl.textContent = 'Выключен';
+          } else {
+            wantMusic = true;
+            startFallbackAmbientTrack();
+            statusTextEl.textContent = 'Включён';
+          }
+          return;
+        }
+
+        if (trackAudio.paused) {
+          wantMusic = true;
+          trackAudio.preload = 'auto';
+          startMusic();
+        } else {
+          wantMusic = false;
+          fadeVolume(0, 500, () => {
+            trackAudio.pause();
+            syncTrackState();
+          });
+          statusTextEl.textContent = 'Выключен';
+        }
+      }
+
+      playerBtn.addEventListener('click', toggleMusic);
+
+      /* ----------------------------------------------------------
+         4. УПРАВЛЕНИЕ ФОНОВЫМИ ВИДЕО И СПОТЛАЙТОМ (BgLayers)
+      ---------------------------------------------------------- */
+      const filmsEl = document.getElementById('films-el');
+      const spotEl = document.getElementById('spot-el');
+      const videos = Array.from(document.querySelectorAll('.film'));
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const hasFinePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      let activeVideo = null;
+      let zCounter = 1;
+      let cleanupTimeout = 0;
+      let lightPauseTimeout = 0;
+
+      function findVideo(filmNum, lvl) {
+        return videos.find((v) => +v.dataset.film === filmNum && v.dataset.lvl === lvl);
+      }
+
+      function getTargetVideo() {
+        if (!Q.entered) return findVideo(0, 'c');
+        if (Q.film === 0) return findVideo(0, Q.idx > 0 ? 'b' : 'a');
+        return findVideo(Q.film, 'b');
+      }
+
+      function crossfadeVideo(duration = 1200, delay = 0) {
+        const nextVid = getTargetVideo();
+        if (!nextVid || !activeVideo || nextVid === activeVideo) return;
+        const prevVid = activeVideo;
+        activeVideo = nextVid;
+
+        if (prevVid.dataset.film === nextVid.dataset.film) {
+          try {
+            nextVid.currentTime = prevVid.currentTime;
+          } catch (e) {}
+        }
+
+        nextVid.style.zIndex = ++zCounter;
+        nextVid.style.transitionDuration = duration + 'ms';
+        nextVid.style.transitionDelay = delay + 'ms';
+
+        if (Q.entered && !Q.light) {
+          nextVid.play().catch(() => {});
+        }
+        nextVid.classList.add('is-front');
+
+        clearTimeout(cleanupTimeout);
+        cleanupTimeout = setTimeout(() => {
+          videos.forEach((v) => {
+            if (v !== activeVideo) {
+              v.style.transitionDuration = '0ms';
+              v.style.transitionDelay = '0ms';
+              v.classList.remove('is-front');
+              v.pause();
+            }
+          });
+        }, duration + delay + 150);
+      }
+
+      activeVideo = findVideo(0, 'c');
+      if (activeVideo) activeVideo.classList.add('is-front');
+
+      // Плавное движение пятна света (.spot) и параллакс видео (.films)
+      let prevScrollY = 0;
+      let scrollVelocity = 0;
+      let smoothProgress = 0;
+      let targetX = window.innerWidth / 2;
+      let targetY = window.innerHeight / 2;
+      let curX = targetX;
+      let curY = targetY;
+      let loopActive = false;
+      let firstTick = true;
+
+      window.addEventListener('pointermove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      }, { passive: true });
+
+      function tickBgPhysics() {
+        if (!loopActive) return;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const sy = window.scrollY;
+        const dy = sy - prevScrollY;
+        prevScrollY = sy;
+
+        scrollVelocity += (Math.min(Math.abs(dy), 90) - scrollVelocity) * 0.12;
+        smoothProgress += (clamp(sy / maxScroll) - smoothProgress) * 0.07;
+
+        if (!hasFinePointer) {
+          targetX = window.innerWidth * (0.5 + 0.38 * Math.sin(smoothProgress * 11));
+          targetY = window.innerHeight * (0.5 + 0.32 * Math.cos(smoothProgress * 8));
+        }
+
+        curX += (targetX - curX) * 0.06;
+        curY += (targetY - curY) * 0.06;
+
+        if (
+          !firstTick &&
+          scrollVelocity < 0.02 &&
+          Math.abs(curX - targetX) < 0.05 &&
+          Math.abs(curY - targetY) < 0.05 &&
+          Math.abs(clamp(sy / maxScroll) - smoothProgress) < 0.0004
+        ) {
+          requestAnimationFrame(tickBgPhysics);
+          return;
+        }
+
+        firstTick = false;
+        if (spotEl) {
+          spotEl.style.transform = `translate3d(${curX.toFixed(1)}px,${curY.toFixed(1)}px,0)`;
+        }
+        if (filmsEl) {
+          filmsEl.style.transform = `translate3d(0,${(-smoothProgress * 5).toFixed(2)}%,0) scale(${(1 + smoothProgress * 0.1 + scrollVelocity * 0.0025).toFixed(4)})`;
+        }
+        requestAnimationFrame(tickBgPhysics);
+      }
+
+      function startBgLoop() {
+        if (!reducedMotion && !loopActive) {
+          loopActive = true;
+          prevScrollY = window.scrollY;
+          requestAnimationFrame(tickBgPhysics);
+        }
+      }
+
+      /* ----------------------------------------------------------
+         5. ОТСЛЕЖИВАНИЕ СЕКЦИЙ, ТЕМ И ПРОГРЕСС-БАРА (Io)
+      ---------------------------------------------------------- */
+      const sections = Array.from(document.querySelectorAll('.sec'));
+      const progressBarFill = document.getElementById('progress-bar-fill');
+      const topIdxNum = document.getElementById('top-idx-num');
+      const topIdxName = document.getElementById('top-idx-name');
+
+      let currentSecIdx = -1;
+      let lastScrollPos = 0;
+      let prevSceneTimer = 0;
+
+      function syncBodyAttributes() {
+        const b = document.body;
+        b.classList.toggle('locked', !Q.entered);
+        b.classList.toggle('on', Q.entered);
+        b.classList.toggle('light', Q.light);
+        b.dataset.scene = Q.scene;
+      }
+
+      function checkActiveSection() {
+        const midY = window.innerHeight * 0.5;
+        let foundIdx = 0;
+        sections.forEach((sec, idx) => {
+          if (sec.getBoundingClientRect().top <= midY) {
+            foundIdx = idx;
+          }
+        });
+
+        if (foundIdx === currentSecIdx) return;
+        const oldIdx = currentSecIdx;
+        currentSecIdx = foundIdx;
+        const secEl = sections[foundIdx];
+
+        document.body.style.setProperty('--py', window.scrollY >= lastScrollPos ? '100%' : '0%');
+        document.body.style.setProperty('--px', '50%');
+
+        const wasLight = Q.light;
+        const prevFilm = Q.film;
+        const prevWasZero = Q.idx === 0;
+
+        Q.light = secEl.dataset.theme === 'light';
+        Q.idx = foundIdx;
+
+        const oldScene = document.body.dataset.scene;
+        if (oldScene) {
+          document.body.dataset.prev = oldScene;
+          clearTimeout(prevSceneTimer);
+          prevSceneTimer = setTimeout(() => {
+            delete document.body.dataset.prev;
+          }, 1800);
+        }
+
+        Q.scene = secEl.id;
+        Q.name = secEl.dataset.name || '';
+        if (secEl.dataset.film != null) {
+          Q.film = +secEl.dataset.film;
+        }
+
+        lastScrollPos = window.scrollY;
+
+        // Обновляем UI шапки и темы
+        topIdxNum.textContent = padIdx(Q.idx);
+        topIdxName.textContent = Q.name;
+        syncBodyAttributes();
+
+        // Переключение видео при смене сцены
+        if (Q.entered && (Q.film !== prevFilm || (Q.idx > 0) !== !prevWasZero)) {
+          crossfadeVideo();
+        }
+
+        // Пауза/воспроизведение видео при смене светлой/темной темы
+        if (Q.light !== wasLight) {
+          clearTimeout(lightPauseTimeout);
+          if (Q.light) {
+            lightPauseTimeout = setTimeout(() => activeVideo && activeVideo.pause(), 1300);
+          } else if (Q.entered && activeVideo) {
+            activeVideo.play().catch(() => {});
+          }
+        }
+
+        if (oldIdx >= 0 && Q.entered) {
+          playScrollTransitionSound(foundIdx > oldIdx);
+        }
+      }
+
+      onScrollOrResize(() => {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        Q.progress = total > 0 ? clamp(window.scrollY / total) : 0;
+        progressBarFill.style.transform = `scaleX(${Q.progress})`;
+        checkActiveSection();
+      });
+
+      /* ----------------------------------------------------------
+         6. ПОСЛОВНЫЙ SCRUB-ТЕКСТ В СЕКЦИИ "ОБО МНЕ" (ScrubText)
+      ---------------------------------------------------------- */
+      const scrubContainer = document.getElementById('scrub-text-el');
+      const scrubWords = 'un1q — это Hermann. Я придумываю и делаю сам. Один человек, от первого экрана до сдачи проекта.'
+        .trim()
+        .split(/\s+/);
+
+      scrubWords.forEach((word) => {
+        const span = document.createElement('span');
+        span.className = 'w';
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = word;
+        scrubContainer.appendChild(span);
+        scrubContainer.appendChild(document.createTextNode(' '));
+      });
+
+      let lastScrubProg = -1;
+      onScrollOrResize(() => {
+        if (!scrubContainer) return;
+        const vh = window.innerHeight;
+        const rect = scrubContainer.getBoundingClientRect();
+        const prog = clamp((vh * 0.82 - rect.top) / (vh * 0.5 + rect.height * 0.4));
+        if (prog === lastScrubProg) return;
+        lastScrubProg = prog;
+
+        const children = scrubContainer.children;
+        const count = children.length;
+        for (let i = 0; i < count; i++) {
+          const wProg = clamp(prog * (count + 3) - i, 0, 3) / 3;
+          const el = children[i];
+          el.style.opacity = String(0.1 + 0.9 * wProg);
+          el.style.filter = wProg >= 1 ? 'none' : `blur(${((1 - wProg) * 14).toFixed(1)}px)`;
+          el.style.transform = `translateY(${((1 - wProg) * 0.15).toFixed(3)}em)`;
+        }
+      });
+
+      /* ----------------------------------------------------------
+         7. STICKY-ШАГИ В СЕКЦИИ "КАК Я РАБОТАЮ" (ApproachSection)
+      ---------------------------------------------------------- */
+      const stepEls = Array.from(document.querySelectorAll('.step'));
+      onScrollOrResize(() => {
+        const vh = window.innerHeight;
+        stepEls.forEach((stepEl, idx) => {
+          const inner = stepEl.firstElementChild;
+          const nextStep = stepEls[idx + 1];
+          if (!nextStep) {
+            inner.style.opacity = '';
+            inner.style.filter = '';
+            return;
+          }
+          const overlap = clamp(1 - nextStep.getBoundingClientRect().top / vh);
+          const op = (1 - overlap).toFixed(3);
+          const flt = overlap > 0 ? `blur(${(overlap * 40).toFixed(1)}px)` : '';
+          if (inner._o !== op || inner._f !== flt) {
+            inner._o = op;
+            inner._f = flt;
+            inner.style.opacity = op;
+            inner.style.filter = flt;
+          }
+        });
+      });
+
+      /* ----------------------------------------------------------
+         8. ДИРЕКТИВА ПЛАВНОГО ПОЯВЛЕНИЯ ЭЛЕМЕНТОВ (v-reveal / .rise)
+      ---------------------------------------------------------- */
+      const revealSet = new Set();
+      function markRevealed(el) {
+        el.classList.add('in');
+        revealSet.delete(el);
+        revealObserver.unobserve(el);
+      }
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) markRevealed(entry.target);
+          });
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -6% 0px' }
+      );
+
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        revealSet.add(el);
+        revealObserver.observe(el);
+      });
+
+      onScrollOrResize(() => {
+        revealSet.forEach((el) => {
+          if (el.getBoundingClientRect().bottom < 0) {
+            markRevealed(el);
+          }
+        });
+      });
+
+      /* ----------------------------------------------------------
+         9. ЭКРАН ВХОДА (EnterGate) И РАДИАЛЬНОЕ РАСКРЫТИЕ CLIP-PATH
+      ---------------------------------------------------------- */
+      const gateBtn = document.getElementById('enter-gate-btn');
+      let gateOpened = false;
+
+      function animateGateRadialClip() {
+        gateBtn.classList.add('is-gone');
+        gateBtn.setAttribute('aria-hidden', 'true');
+
+        const canClipPath =
+          !reducedMotion &&
+          window.CSS &&
+          CSS.supports &&
+          CSS.supports('clip-path', 'path("M0 0L1 1Z")');
+
+        if (!canClipPath) {
+          gateBtn.classList.add('no-clip');
+          return;
+        }
+
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const cx = w / 2;
+        const cy = h / 2;
+        const maxRadius = Math.hypot(cx, cy) + 12;
+        const tStart = performance.now() + 250;
+
+        const easeInOutCubic = (t) =>
+          t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const stepClip = (now) => {
+          const p = clamp((now - tStart) / 2100);
+          if (p > 0 && gateBtn) {
+            const r = maxRadius * easeInOutCubic(p);
+            gateBtn.style.clipPath = `path(evenodd,"M0 0H${w}V${h}H0Z M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z")`;
+          }
+          if (p < 1) requestAnimationFrame(stepClip);
+        };
+        requestAnimationFrame(stepClip);
+      }
+
+      function enterApplication() {
+        if (Q.entered) return;
+        Q.entered = true;
+        gateOpened = true;
+
+        syncBodyAttributes();
+        playEnterSound();
+        animateGateRadialClip();
+        startMusic();
+        startBgLoop();
+
+        if (activeVideo) {
+          activeVideo.play().catch(() => {});
+          crossfadeVideo(3200, 300);
+        }
+
+        scheduleScrollTask();
+
+        if (location.hash.length > 1) {
+          Promise.resolve().then(() => {
+            const target = document.querySelector(location.hash);
+            if (target) target.scrollIntoView();
+          });
+        }
+      }
+
+      gateBtn.addEventListener('click', enterApplication);
+      window.addEventListener('keydown', (e) => {
+        if (!gateOpened && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          enterApplication();
+        }
+      });
+
+      // Пауза звука и видео при сворачивании вкладки
+      document.addEventListener('visibilitychange', () => {
+        if (!Q.entered) return;
+        if (document.hidden) {
+          trackAudio.pause();
+          if (activeVideo) activeVideo.pause();
+          loopActive = false;
+        } else {
+          if (wantMusic && !usingFallbackSynth) trackAudio.play().catch(() => {});
+          if (!Q.light && activeVideo) activeVideo.play().catch(() => {});
+          startBgLoop();
+        }
+      });
+
+      if (location.hash.length > 1) {
+        enterApplication();
+      }
+    })();
+  </script>
+</body>
+</html>
